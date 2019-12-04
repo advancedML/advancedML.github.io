@@ -17,3 +17,132 @@ Specifically, these three methods are:
 - a novel algorithm providing the solution path. 
 
 In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter. 
+
+## Case Study on Tumor Dataset
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
+<div id="chart" style="height:60vh;width:100%"><div>
+<script>
+    myChart = echarts.init(document.getElementById("chart"));
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "y_case_study.csv",
+            dataType: "text",
+            success: function (raw) { 
+                data = [];
+                raw = raw.split("\n");
+                for(i=0;i<raw.length;i++){
+                    data.push([i,parseFloat(raw[i])]);
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "genlasso_nooptimal.csv",
+                    dataType: "text",
+                    success: function (raw1) { 
+                        data1 = [];
+                        raw1 = raw1.split("\n");
+                        for(i=0;i<raw1.length;i++){
+                            data1.push([i,parseFloat(raw1[i])]);
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "CLasso_case_study.csv",
+                            dataType: "text",
+                            success: function (raw2) { 
+                                data2 = [];
+                                raw2 = raw2.split("\n");
+                                for(i=0;i<raw2.length;i++){
+                                    data2.push([i,parseFloat(raw2[i])]);
+                                }
+                                option = {
+                                    title: {
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data.',
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        axisPointer: {
+                                            type: 'cross'
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'value',
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        min: -3,
+                                        max: 6,
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    series: [{
+                                        name: 'Ground Truth',
+                                        type: 'scatter',
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data
+                                    },
+                                    {
+                                        name: 'Generalized Lasso',
+                                        type: 'line',
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data1
+                                    },
+                                    {
+                                        name: 'Constrained Lasso',
+                                        type: 'line',
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data2
+                                    }]
+                                };
+                                myChart.setOption(option);
+                            }
+                        });
+                    }
+                });
+             }
+        });
+    });
+   
+
+</script>
