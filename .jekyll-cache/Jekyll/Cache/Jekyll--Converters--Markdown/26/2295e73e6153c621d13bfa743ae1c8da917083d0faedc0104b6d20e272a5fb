@@ -1,4 +1,4 @@
-I"U<h1 id="a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
+I"q<h1 id="a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
 
 <h2 id="introduction">INTRODUCTION</h2>
 
@@ -18,9 +18,13 @@ Specifically, these three methods are:</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
 
-<div id="chart" style="height:60vh;width:100%"><div>
+<div id="chart" style="height:60vh;width:100%"></div>
+<div id="chart1" style="height:60vh;width:100%"></div>
+
 <script>
     myChart = echarts.init(document.getElementById("chart"));
+    myChart1 = echarts.init(document.getElementById("chart1"));
+
     $(document).ready(function () {
         $.ajax({
             type: "GET",
@@ -54,7 +58,7 @@ Specifically, these three methods are:</p>
                                 }
                                 option = {
                                     title: {
-                                        text: 'Figure 5: Brain Tumor Data. Sparse fused lasso estimates on the brain tumor data using both the generalized lasso and the constrained lasso.',
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data.',
                                         left: 'center'
                                     },
                                     tooltip: {
@@ -71,6 +75,11 @@ Specifically, these three methods are:</p>
                                             }
                                         },
                                     },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
                                     yAxis: {
                                         type: 'value',
                                         min: -3,
@@ -84,9 +93,10 @@ Specifically, these three methods are:</p>
                                     series: [{
                                         name: 'Ground Truth',
                                         type: 'scatter',
+                                        zlevel: 3,
                                         label: {
                                             emphasis: {
-                                                show: true,
+                                                show: false,
                                                 position: 'left',
                                                 textStyle: {
                                                     color: 'blue',
@@ -99,9 +109,11 @@ Specifically, these three methods are:</p>
                                     {
                                         name: 'Generalized Lasso',
                                         type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 4,
                                         label: {
                                             emphasis: {
-                                                show: true,
+                                                show: false,
                                                 position: 'left',
                                                 textStyle: {
                                                     color: 'blue',
@@ -114,9 +126,11 @@ Specifically, these three methods are:</p>
                                     {
                                         name: 'Constrained Lasso',
                                         type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 5,
                                         label: {
                                             emphasis: {
-                                                show: true,
+                                                show: false,
                                                 position: 'left',
                                                 textStyle: {
                                                     color: 'blue',
@@ -134,9 +148,10 @@ Specifically, these three methods are:</p>
                 });
              }
         });
+        
     });
    
 
 </script>
-</div></div>
+
 :ET
