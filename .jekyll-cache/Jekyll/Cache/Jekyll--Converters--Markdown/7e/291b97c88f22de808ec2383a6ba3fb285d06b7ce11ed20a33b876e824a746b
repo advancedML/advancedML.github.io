@@ -1,6 +1,5 @@
-I"H<h1 id="a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
+I"=<h1 id="a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
 
-<p>===</p>
 <h2 id="introduction">INTRODUCTION</h2>
 
 <p>The original paper focuses on studying the constrained lasso problem. Specifically, authors studied the generalized lasso problem, which integrates the classical lasso problem with linear equality and inequality constraints. Through simulation studies and real-data applications, the proposed model structure allows users to infused the prior knowledge during the model parameter estimation. More importantly, authors have discovered that a variety of lasso types of problems, including the generalized lasso, can always be reformulated and solved as a constrained lasso problem. This findings provides excellent opportunity to scale up the applications that constrained lasso can handle. The authors derived three different algorithms to easimtae the model parameters for constrained lasso problems as a function of the tuning parameter ρ.
