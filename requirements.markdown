@@ -2,6 +2,7 @@
 layout: page
 title: Requirements
 permalink: /requirements/
+exclude: false
 ---
 
 To execute the constrained Lasso by using

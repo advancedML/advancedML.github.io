@@ -3,9 +3,10 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 # title: advMLProj
 layout: home
+title: A Reproduction of “Algorithms for Fitting the Constrained Lasso”
+exclude: true
+authors: ['Yifu Li', 'Xiaoyu Chen']
 ---
-# A Reproduction of “Algorithms for Fitting the Constrained Lasso”
-
 
 ## INTRODUCTION
 

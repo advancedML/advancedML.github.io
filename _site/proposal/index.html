@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Proposal | Advanced Machine Learning Project</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Proposal" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A Reproduction of “Algorithms for Fitting the Constrained Lasso”" />
+<meta property="og:description" content="A Reproduction of “Algorithms for Fitting the Constrained Lasso”" />
+<link rel="canonical" href="http://localhost:4000/proposal/" />
+<meta property="og:url" content="http://localhost:4000/proposal/" />
+<meta property="og:site_name" content="Advanced Machine Learning Project" />
+<script type="application/ld+json">
+{"description":"A Reproduction of “Algorithms for Fitting the Constrained Lasso”","headline":"Proposal","@type":"WebPage","url":"http://localhost:4000/proposal/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Advanced Machine Learning Project" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Advanced Machine Learning Project</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/proposal/">Proposal</a><a class="page-link" href="/requirements/">Requirements</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Proposal</h1>
+  </header>
+
+  <div class="post-content">
+    <p>[TOC]</p>
+
+<h1 id="project-proposal-for-advanced-machine-learning-a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">Project Proposal for Advanced Machine Learning: A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
+
+<p>Yifu Li and Xiaoyu Chen</p>
+
+<p>Department of Industrial and Systems Engineering, Virginia Tech</p>
+
+<hr />
+
+<h3 id="1-introduction">1. INTRODUCTION</h3>
+
+<p>Variable selection is an important topic in machine learning and statistical learning to identify significant variables to facilitate better interpretations of correlations among dependent and independent variables. Many variable selection methods have been proposed, such as the Lasso (Tibshirani, 1996) and its variants. In this project, the paper entitled “Algorithms for Fitting the Constrained Lasso” by Gaines et al. (2018) is selected to understand and reproduce a constrained variable selection model Constrained Lasso by using alternating direction method of multipliers (ADMM) associated with an efficient solution path algorithm. The team will reproduce the results in application study in both “4. Simulation Examples” and “5.2. Brain Tumor Data” by comparing with benchmark methods such as the Lasso and fused Lasso. Specifically, Figure 2 and Figure 3 will be reproduced.</p>
+
+<h3 id="2-preliminary-plan">2. PRELIMINARY PLAN</h3>
+
+<p>Python programming language will be used to implement the proposed ADMM solver and solution path algorithm in (Gaines et al., 2018). Mr. Chen will implement ADMM solver and reproduce the results for simulation examples, and Mr. Li will implement solution path algorithm and reproduce the results for Brain Tumor data analysis. For simulation examples, we will follow the same settings as provided in the paper. And for case study in Brain Tumor Data, the data set from the link will be adopted.</p>
+
+<h3 id="3-evaluation-methods">3. EVALUATION METHODS</h3>
+
+<p>We would like to validate if Constrained Lasso generates better performance compared with methods that perform variable selection, such as linear regression, ridge regression (Hoerl et al., 1975), lasso regression (Tibshirani, 1996), fused Lasso (Petersen et al., 2016) or other advanced machine learning methods. The accuracy, variable selection results, and solution paths from benchmark models will be compared with the Constrained Lasso model. The reproduced Figure 2 and 3 will be compared with original Figure 2 and 3. The differences will be further analyzed by using statistical tests and will be interpreted in terms of algorithms.</p>
+
+<h3 id="4-deliverables">4. DELIVERABLES</h3>
+
+<p>A website will be created 1) to summarize the result from the original paper; 2) to describe the procedure you took to reproduce the result; 3) to present measurements and/or analysis of what discovered; and 4) to provide references to relevant papers.</p>
+
+<h3 id="references">REFERENCES</h3>
+
+<ul>
+  <li>Gaines, B. R., Kim, J., and Zhou, H. (2018) “Algorithms for fitting the constrained lasso.” Journal of Computational and Graphical Statistics 27.4: 861-871.</li>
+  <li>Hoerl, A. E., Kannard, R. W., and Baldwin, K. F. (1975), “Ridge Regression: Some Simulations,” Communications in Statistics-Theory and Methods, 4, 105-123.</li>
+  <li>Petersen, A., Witten, D., and Simon, N. (2016), “Fused Lasso Additive Model,” Journal of Computational and Graphical Statistics, 25, 1005-1025.</li>
+  <li>Tibshirani, R. (1996), “Regression Shrinkage and Selection Via the Lasso,” Journal of the Royal Statistical Society: Series B (Methodological), 58, 267-288.</li>
+  <li>Xin, B., Tian, Y., Wang, Y., and Gao, W. (2015), “Background Subtraction Via Generalized Fused Lasso Foreground Modeling,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 4676-4684.</li>
+</ul>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Advanced Machine Learning Project</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Advanced Machine Learning Project</li><li><a class="u-email" href="mailto:xiaoyuch@vt.edu">xiaoyuch@vt.edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiaoyuch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiaoyuch</span></a></li><li><a href="https://www.twitter.com/xiaoyuch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">xiaoyuch</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Reproduction of “Algorithms for Fitting the Constrained Lasso”</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

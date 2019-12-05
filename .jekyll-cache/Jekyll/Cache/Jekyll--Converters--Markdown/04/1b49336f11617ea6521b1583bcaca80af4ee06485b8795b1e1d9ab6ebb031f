@@ -1,0 +1,276 @@
+I"6<h2 id="introduction">INTRODUCTION</h2>
+
+<p>The original paper focuses on studying the constrained lasso problem. Specifically, authors studied the generalized lasso problem, which integrates the classical lasso problem with linear equality and inequality constraints. Through simulation studies and real-data applications, the proposed model structure allows users to infused the prior knowledge during the model parameter estimation. More importantly, authors have discovered that a variety of lasso types of problems, including the generalized lasso, can always be reformulated and solved as a constrained lasso problem. This findings provides excellent opportunity to scale up the applications that constrained lasso can handle. The authors derived three different algorithms to easimtae the model parameters for constrained lasso problems as a function of the tuning parameter ρ.
+Specifically, these three methods are:</p>
+
+<ul>
+  <li>quadratic programming (QP),</li>
+  <li>the alternating direction method of multipliers (ADMM),</li>
+  <li>a novel algorithm providing the solution path.</li>
+</ul>
+
+<p>In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter.</p>
+
+<h2 id="case-study-on-tumor-dataset">Case Study on Tumor Dataset</h2>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
+
+<div id="chart" style="height:60vh;width:100%"></div>
+<div id="chart1" style="height:60vh;width:100%"></div>
+
+<script>
+    myChart = echarts.init(document.getElementById("chart"));
+    myChart1 = echarts.init(document.getElementById("chart1"));
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "y_case_study.csv",
+            dataType: "text",
+            success: function (raw) { 
+                data = [];
+                raw = raw.split("\n");
+                for(i=0;i<raw.length;i++){
+                    data.push([i,parseFloat(raw[i])]);
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "genlasso_result.csv",
+                    dataType: "text",
+                    success: function (raw1) { 
+                        data1 = [];
+                        raw1 = raw1.split("\n");
+                        for(i=0;i<raw1.length;i++){
+                            data1.push([i,parseFloat(raw1[i])]);
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "CLasso_case_study.csv",
+                            dataType: "text",
+                            success: function (raw2) { 
+                                data2 = [];
+                                raw2 = raw2.split("\n");
+                                for(i=0;i<raw2.length;i++){
+                                    data2.push([i,parseFloat(raw2[i])]);
+                                }
+                                option = {
+                                    title: {
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data',
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        axisPointer: {
+                                            type: 'cross'
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'value',
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        min: -3,
+                                        max: 6,
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    series: [{
+                                        name: 'Ground Truth',
+                                        type: 'scatter',
+                                        zlevel: 3,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data
+                                    },
+                                    {
+                                        name: 'Generalized Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 4,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data1
+                                    },
+                                    {
+                                        name: 'Constrained Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 5,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data2
+                                    }]
+                                };
+                                myChart.setOption(option);
+                            }
+                        });
+                    }
+                });
+             }
+        });
+        $.ajax({
+            type: "GET",
+            url: "y_case_study.csv",
+            dataType: "text",
+            success: function (raw) { 
+                data = [];
+                raw = raw.split("\n");
+                for(i=0;i<raw.length;i++){
+                    data.push([i,parseFloat(raw[i])]);
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "genlasso_nooptimal.csv",
+                    dataType: "text",
+                    success: function (raw4) { 
+                        data4 = [];
+                        raw4 = raw4.split("\n");
+                        for(i=0;i<raw4.length;i++){
+                            data4.push([i,parseFloat(raw4[i])]);
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "CLasso_case_study_best.csv",
+                            dataType: "text",
+                            success: function (raw5) { 
+                                data5 = [];
+                                raw5 = raw5.split("\n");
+                                for(i=0;i<raw5.length;i++){
+                                    data5.push([i,parseFloat(raw5[i])]);
+                                }
+                                option = {
+                                    title: {
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data with lowest RMSEs',
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        axisPointer: {
+                                            type: 'cross'
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'value',
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        min: -3,
+                                        max: 6,
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    series: [{
+                                        name: 'Ground Truth',
+                                        type: 'scatter',
+                                        zlevel: 3,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data
+                                    },
+                                    {
+                                        name: 'Generalized Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 4,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data4
+                                    },
+                                    {
+                                        name: 'Constrained Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 5,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data5
+                                    }]
+                                };
+                                myChart1.setOption(option);
+                            }
+                        });
+                    }
+                });
+             }
+        });
+    });
+   
+
+</script>
+
+:ET
