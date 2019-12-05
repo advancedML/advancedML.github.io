@@ -1,0 +1,24 @@
+I"—<p>To execute the constrained Lasso by using</p>
+
+<ul>
+  <li>path optimization</li>
+  <li>quadratic programming</li>
+  <li>ADMM</li>
+</ul>
+
+<p>the following requirements should be satisfied:</p>
+
+<ol>
+  <li>Install <a href="https://julialang-s3.julialang.org/bin/winnt/x64/0.7/julia-0.7.0-win64.exe">Julia 0.7.0</a></li>
+  <li><code class="highlighter-rouge">add</code> and <code class="highlighter-rouge">build</code> packages in <code class="highlighter-rouge">Julia</code>:
+    <ul>
+      <li><code class="highlighter-rouge">using Pkg</code></li>
+      <li><code class="highlighter-rouge">Pkg.add("IJulia")</code></li>
+      <li><code class="highlighter-rouge">Pkg.build("IJulia")</code></li>
+      <li><code class="highlighter-rouge">using IJulia</code></li>
+      <li><code class="highlighter-rouge">notebook()</code>, which will install and open a <code class="highlighter-rouge">Jupyter Notebook</code> with <code class="highlighter-rouge">Julia</code> kernel embedded.</li>
+    </ul>
+  </li>
+  <li>In the Jupyter Notebook, find the <a href="https://github.com/advancedML/advancedML.github.io/blob/master/res/Course%20Project.ipynb">Class Project.ipynb</a></li>
+</ol>
+:ET

@@ -19,4 +19,4 @@ the following requirements should be satisfied:
     - `Pkg.build("IJulia")`
     - `using IJulia`
     - `notebook()`, which will install and open a `Jupyter Notebook` with `Julia` kernel embedded.
-3. In the Jupyter Notebook, find the [Class Project.ipynb]()
+3. In the Jupyter Notebook, find the [Class Project.ipynb](https://github.com/advancedML/advancedML.github.io/blob/master/res/Course%20Project.ipynb)
