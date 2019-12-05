@@ -37,6 +37,8 @@ In the simulation studies, the authors found out that the novel solution path al
 
 The tumor data set adopts the comparative genomic hybridization (CGH) measurement data from glioblastoma multiforme brain tumors (Bredel et al. 2005). This data set has already been studied several times in the literature (Tibshirani and Wang 2008). Specifically, people adopt CGH array experiments to capture the DNA copy number in its log2 ratio, which is measured by the number of DNA copies of the gene in tumor cells to the number of DNA copies in reference cells. We are trying to recover the model parameters by modeling the tumor data set and compare the recovered parameters with the ones from the original paper.
 
+The original article does not mention how to perform model selection by selecting tuning parameters to reproduce Figure 5. Therefore, we adopted two strategies in this project: 1) manually selecting the model which produces similar esimation results as the original article; and 2) selecting the model associated with the least root-mean-square-error (RMSE). The results are presented in the following two interactive graphics. 
+
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
 <div id="chart" style="height:60vh;width:100%"></div>
