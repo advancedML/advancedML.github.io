@@ -138,24 +138,25 @@ Then, we evaluted three models with `ρ = 2` and `ρ = 6` as described in See et
 <div id="chart3" style="height:60vh;width:100%"></div>
 
 ## 4. DISCUSSIONS
+We found out that the computational time for the simulation study are slightly different from the figure 2 and 3 of the original papers. Specifically, ADMM and quadratic programming generated the slowest performance for simulation 1 and 2 respectively in the orignal paper. However, our finding shows that ADMM generated the slowest performance (on average) for both simulation study. However, the patterns on the increasing of the computational time for both simulations are almost identical to the original paper.
+For the brain tumor case study, we find that the generalized lasso and constrained lasso almost have the same results in terms of the variable selection results. This finding is almost identical to the orignal paper and the figure shows that both methods can accurately recover the true model parameters. As a result, we can agree with the authors in the original paper and conclude that the constrained lasso can successfully solve the fused-lasso problem, hence has better generality for solving lasso-type of problems.
 
-**Yifuge, please add more descriptions here**
 
 
 ## 5. CONCLUSIONS AND FUTURE WORK
 
-**Yifuge, please add more descriptions here**
+In this work, we reproduced the simulation study and the brain tumor case study from Gaines (2018). Comparing with the original work, we generated similar results for the simulation study and almost identical result for the brain tumor case study. In the future work, we can consider to run more replications of the simulation study, so that we have a more stable performance. Furthermore, we are using Julia 0.7 version, which was published three years agao. As a result, we can expect the latest Julia version can bring better performance with updated computational package.
 
 ## REFERENCES
 
-**Yifuge, please add more references here**
-
+- Tibshirani, Robert, et al. "Sparsity and smoothness via the fused lasso." Journal of the Royal Statistical Society: Series B (Statistical Methodology) 67.1 (2005): 91-108.
 - Gaines, B. R., Kim, J., and Zhou, H. (2018) "Algorithms for fitting the constrained lasso." Journal of Computational and Graphical Statistics 27.4: 861-871.
 - Hoerl, A. E., Kannard, R. W., and Baldwin, K. F. (1975), "Ridge Regression: Some Simulations," Communications in Statistics-Theory and Methods, 4, 105-123.
 - Petersen, A., Witten, D., and Simon, N. (2016), "Fused Lasso Additive Model," Journal of Computational and Graphical Statistics, 25, 1005-1025.
 - Tibshirani, R. (1996), "Regression Shrinkage and Selection Via the Lasso," Journal of the Royal Statistical Society: Series B (Methodological), 58, 267-288.
 - Xin, B., Tian, Y., Wang, Y., and Gao, W. (2015), "Background Subtraction Via Generalized Fused Lasso Foreground Modeling," in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 4676-4684.
-
+- Zhou, Hua, and Kenneth Lange. "A path algorithm for constrained estimation." Journal of Computational and Graphical Statistics 22.2 (2013): 261-283.
+- James, Gareth M., Courtney Paulson, and Paat Rusmevichientong. "The constrained lasso." Refereed Conference Proceedings. Vol. 31. 2012.
 
 
 
