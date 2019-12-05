@@ -5,13 +5,20 @@ permalink: /proposal/
 exclude: false
 ---
 
-[TOC]
-
 # Project Proposal for Advanced Machine Learning: A Reproduction of “Algorithms for Fitting the Constrained Lasso”
 
 Yifu Li and Xiaoyu Chen
 
 Department of Industrial and Systems Engineering, Virginia Tech
+
+<hr>
+
+### Content
+1. [INTRODUCTION](#1-introduction)
+2. [PRELIMINARY PLAN](#2-preliminary-plan)
+3. [EVALUATION METHODS](#3-evaluation-methods)
+4. [DELIVERABLES](#4-deliverables)
+5. [REFERENCES](#references)
 
 <hr>
 

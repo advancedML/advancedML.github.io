@@ -1,4 +1,13 @@
-I"�<h1 id="project-proposal-for-advanced-machine-learning-a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">Project Proposal for Advanced Machine Learning: A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
+I"@<h3 id="content">Content</h3>
+<ol>
+  <li><a href="#1-introduction">INTRODUCTION</a></li>
+  <li><a href="#2-preliminary-plan">PRELIMINARY PLAN</a></li>
+  <li><a href="#3-evaluation-methods">EVALUATION METHODS</a></li>
+  <li><a href="#4-deliverables">DELIVERABLES</a></li>
+  <li><a href="#references">REFERENCES</a></li>
+</ol>
+
+<h1 id="project-proposal-for-advanced-machine-learning-a-reproduction-of-algorithms-for-fitting-the-constrained-lasso">Project Proposal for Advanced Machine Learning: A Reproduction of “Algorithms for Fitting the Constrained Lasso”</h1>
 
 <p>Yifu Li and Xiaoyu Chen</p>
 
@@ -6,23 +15,23 @@
 
 <hr />
 
-<h2 id="1-introduction">1. INTRODUCTION</h2>
+<h3 id="1-introduction">1. INTRODUCTION</h3>
 
 <p>Variable selection is an important topic in machine learning and statistical learning to identify significant variables to facilitate better interpretations of correlations among dependent and independent variables. Many variable selection methods have been proposed, such as the Lasso (Tibshirani, 1996) and its variants. In this project, the paper entitled “Algorithms for Fitting the Constrained Lasso” by Gaines et al. (2018) is selected to understand and reproduce a constrained variable selection model Constrained Lasso by using alternating direction method of multipliers (ADMM) associated with an efficient solution path algorithm. The team will reproduce the results in application study in both “4. Simulation Examples” and “5.2. Brain Tumor Data” by comparing with benchmark methods such as the Lasso and fused Lasso. Specifically, Figure 2 and Figure 3 will be reproduced.</p>
 
-<h2 id="2-preliminary-plan">2. PRELIMINARY PLAN</h2>
+<h3 id="2-preliminary-plan">2. PRELIMINARY PLAN</h3>
 
 <p>Python programming language will be used to implement the proposed ADMM solver and solution path algorithm in (Gaines et al., 2018). Mr. Chen will implement ADMM solver and reproduce the results for simulation examples, and Mr. Li will implement solution path algorithm and reproduce the results for Brain Tumor data analysis. For simulation examples, we will follow the same settings as provided in the paper. And for case study in Brain Tumor Data, the data set from the link will be adopted.</p>
 
-<h2 id="3-evaluation-methods">3. EVALUATION METHODS</h2>
+<h3 id="3-evaluation-methods">3. EVALUATION METHODS</h3>
 
 <p>We would like to validate if Constrained Lasso generates better performance compared with methods that perform variable selection, such as linear regression, ridge regression (Hoerl et al., 1975), lasso regression (Tibshirani, 1996), fused Lasso (Petersen et al., 2016) or other advanced machine learning methods. The accuracy, variable selection results, and solution paths from benchmark models will be compared with the Constrained Lasso model. The reproduced Figure 2 and 3 will be compared with original Figure 2 and 3. The differences will be further analyzed by using statistical tests and will be interpreted in terms of algorithms.</p>
 
-<h2 id="4-deliverables">4. DELIVERABLES</h2>
+<h3 id="4-deliverables">4. DELIVERABLES</h3>
 
 <p>A website will be created 1) to summarize the result from the original paper; 2) to describe the procedure you took to reproduce the result; 3) to present measurements and/or analysis of what discovered; and 4) to provide references to relevant papers.</p>
 
-<h2 id="references">REFERENCES</h2>
+<h3 id="references">REFERENCES</h3>
 
 <ul>
   <li>Gaines, B. R., Kim, J., and Zhou, H. (2018) “Algorithms for fitting the constrained lasso.” Journal of Computational and Graphical Statistics 27.4: 861-871.</li>
