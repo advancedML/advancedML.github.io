@@ -51,13 +51,22 @@ Specifically, these three methods are:</p>
 
 <p>In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter.</p>
 
-<h2 id="case-study-on-tumor-dataset">Case Study on Tumor Dataset</h2>
+<h2 id="case-study-on-tumor-dataset">CASE STUDY ON TUMOR DATASET</h2>
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
 
 <div id="chart" style="height:60vh;width:100%"></div>
 <div id="chart1" style="height:60vh;width:100%"></div>
+
+<h2 id="simulation-study">SIMULATION STUDY</h2>
+<h3 id="sum-to-zero-constraint">Sum-to-zero constraint</h3>
+
+<p>In this example, we will solve a problem defined by</p>
+
+<p><img src="http://latex.codecogs.com/svg.latex?\begin{array}{ll}{\text { minimize }} &amp; {\frac{1}{2} || \mathbf{y}-\mathbf{X} \boldsymbol{\beta}\left\|_{2}^{2}+\rho\right\| \boldsymbol{\beta} \|_{1}} \\ {\text { subject to }} &amp; {\sum_{j} \beta_{j}=0}\end{array}" border="0" /></p>
+
+<p>First, we generated the predictor matrix $X$ and response vector $y$. To do so, we need a true parameter vector $\beta$ whose sum equals to $0$. Note $n$ is the number of observations, and $p$ is the number of predictors.</p>
 
 <script>
     myChart = echarts.init(document.getElementById("chart"));
