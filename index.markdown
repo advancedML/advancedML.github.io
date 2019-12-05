@@ -35,7 +35,7 @@ In the simulation studies, the authors found out that the novel solution path al
 
 ## 2. CASE STUDY ON TUMOR DATASET
 
-The tumor data set adopts the comparative genomic hybridization (CGH) measurement data from glioblastoma multiforme brain tumors (Bredel et al. 2005). This data set has already been studied several times in the literature (Tibshirani and Wang 2008). Specifically, people adopt CGH array experiments to capture the DNA copy number in its log2 ratio, which is measured by the number of DNA copies of the gene in tumor cells to the number of DNA copies in reference cells. We are trying to recover the model parameters by modeling the tumor data set and compare the recovered parameters with the original paper.
+The tumor data set adopts the comparative genomic hybridization (CGH) measurement data from glioblastoma multiforme brain tumors (Bredel et al. 2005). This data set has already been studied several times in the literature (Tibshirani and Wang 2008). Specifically, people adopt CGH array experiments to capture the DNA copy number in its log2 ratio, which is measured by the number of DNA copies of the gene in tumor cells to the number of DNA copies in reference cells. We are trying to recover the model parameters by modeling the tumor data set and compare the recovered parameters with the ones from the original paper.
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
