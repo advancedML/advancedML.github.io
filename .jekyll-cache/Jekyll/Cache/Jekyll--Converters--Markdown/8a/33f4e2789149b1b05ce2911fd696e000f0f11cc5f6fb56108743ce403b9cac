@@ -1,0 +1,496 @@
+I"�R<h2 id="introduction">INTRODUCTION</h2>
+
+<p>The original paper focuses on studying the constrained lasso problem. Specifically, authors studied the generalized lasso problem, which integrates the classical lasso problem with linear equality and inequality constraints. Through simulation studies and real-data applications, the proposed model structure allows users to infused the prior knowledge during the model parameter estimation. More importantly, authors have discovered that a variety of lasso types of problems, including the generalized lasso, can always be reformulated and solved as a constrained lasso problem. This findings provides excellent opportunity to scale up the applications that constrained lasso can handle. The authors derived three different algorithms to easimtae the model parameters for constrained lasso problems as a function of the tuning parameter ρ.
+Specifically, these three methods are:</p>
+
+<ul>
+  <li>quadratic programming (QP),</li>
+  <li>the alternating direction method of multipliers (ADMM),</li>
+  <li>a novel algorithm providing the solution path.</li>
+</ul>
+
+<p>In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter.</p>
+
+<h2 id="case-study-on-tumor-dataset">CASE STUDY ON TUMOR DATASET</h2>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
+
+<div id="chart" style="height:60vh;width:100%"></div>
+<div id="chart1" style="height:60vh;width:100%"></div>
+
+<h2 id="simulation-study">SIMULATION STUDY</h2>
+<h3 id="sum-to-zero-constraint">Sum-to-zero constraint</h3>
+
+<p>In this example, we will solve a problem defined by</p>
+
+<p><img src="http://latex.codecogs.com/svg.latex?\begin{array}{ll}{\text { minimize }} &amp; {\frac{1}{2} || \mathbf{y}-\mathbf{X} \boldsymbol{\beta}\left\|_{2}^{2}+\rho\right\| \boldsymbol{\beta} \|_{1}} \\ {\text { subject to }} &amp; {\sum_{j} \beta_{j}=0}\end{array}" border="0" /></p>
+
+<p>First, we generated the predictor matrix X and response vector y. 
+To do so, we need a true parameter vector β whose sum equals to 0. 
+Note n is the number of observations, and p is the number of predictors.</p>
+
+<pre><code class="language-Julia">n, p = 50, 100   # (n,p) in {(50,100), (100,500), (500,1000), (1000,2000)}
+β = zeros(p)
+β[1:10] = 1:10
+srand(41)
+X = randn(n, p)
+y = X * β + randn(n)
+bineq = zeros(p)
+Aineq = - eye(p)
+</code></pre>
+
+<p>Then, we evaluted three models with <code class="highlighter-rouge">ρ = 2</code> and <code class="highlighter-rouge">ρ = 6</code> as described in See et al. (2018).</p>
+
+<pre><code class="language-Julia"># Path optimization
+t1 = time_ns()
+β̂path1, ρpath1, objpath, = lsq_classopath(X, y; Aeq = Aeq, beq = beq);
+t2 = time_ns()
+elaps_path = (t2-t1)/1e9/length(ρpath1)
+println(elaps_path)
+
+# ADMM with ρ = 2
+ρ = 2.0
+t1 = time_ns()
+β̂admm = lsq_constrsparsereg_admm(X, y, ρ; proj = x -&gt; x)
+t2 = time_ns()
+elaps_admm2 = (t2-t1)/1e9
+println(elaps_admm2)
+
+# Quadratic programming with ρ = 2
+ρ = 2.0
+t1 = time_ns()
+β̂, = lsq_constrsparsereg(X, y, ρ; Aeq = Aeq, beq = beq);
+t2 = time_ns()
+elaps_QP2 = (t2-t1)/1e9
+println(elaps_QP2)
+
+# ADMM with ρ = 6
+ρ = 6.0
+t1 = time_ns()
+β̂admm = lsq_constrsparsereg_admm(X, y, ρ; proj = x -&gt; x)
+t2 = time_ns()
+elaps_admm6 = (t2-t1)/1e9
+println(elaps_admm6)
+
+# Quadratic programming with ρ = 6
+ρ = 6.0
+t1 = time_ns()
+β̂, = lsq_constrsparsereg(X, y, ρ; Aeq = Aeq, beq = beq);
+t2 = time_ns()
+elaps_QP6 = (t2-t1)/1e9
+println(elaps_QP6)
+</code></pre>
+
+<p>The simulation results are graphically presented:</p>
+
+<div id="chart2" style="height:60vh;width:100%"></div>
+
+<script>
+    function CSVToArray( strData, strDelimiter ){
+        // Check to see if the delimiter is defined. If not,
+        // then default to comma.
+        strDelimiter = (strDelimiter || ",");
+
+        // Create a regular expression to parse the CSV values.
+        var objPattern = new RegExp(
+            (
+                // Delimiters.
+                "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+
+                // Quoted fields.
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+
+                // Standard fields.
+                "([^\"\\" + strDelimiter + "\\r\\n]*))"
+            ),
+            "gi"
+            );
+
+
+        // Create an array to hold our data. Give the array
+        // a default empty first row.
+        var arrData = [[]];
+
+        // Create an array to hold our individual pattern
+        // matching groups.
+        var arrMatches = null;
+
+
+        // Keep looping over the regular expression matches
+        // until we can no longer find a match.
+        while (arrMatches = objPattern.exec( strData )){
+
+            // Get the delimiter that was found.
+            var strMatchedDelimiter = arrMatches[ 1 ];
+
+            // Check to see if the given delimiter has a length
+            // (is not the start of string) and if it matches
+            // field delimiter. If id does not, then we know
+            // that this delimiter is a row delimiter.
+            if (
+                strMatchedDelimiter.length &&
+                strMatchedDelimiter !== strDelimiter
+                ){
+
+                // Since we have reached a new row of data,
+                // add an empty row to our data array.
+                arrData.push( [] );
+
+            }
+
+            var strMatchedValue;
+
+            // Now that we have our delimiter out of the way,
+            // let's check to see which kind of value we
+            // captured (quoted or unquoted).
+            if (arrMatches[ 2 ]){
+
+                // We found a quoted value. When we capture
+                // this value, unescape any double quotes.
+                strMatchedValue = arrMatches[ 2 ].replace(
+                    new RegExp( "\"\"", "g" ),
+                    "\""
+                    );
+
+            } else {
+
+                // We found a non-quoted value.
+                strMatchedValue = arrMatches[ 3 ];
+
+            }
+
+
+            // Now that we have our value string, let's add
+            // it to the data array.
+            arrData[ arrData.length - 1 ].push( parseFloat(strMatchedValue) );
+        }
+
+        // Return the parsed data.
+        return( arrData );
+    }
+    myChart = echarts.init(document.getElementById("chart"));
+    myChart1 = echarts.init(document.getElementById("chart1"));
+    myChart2 = echarts.init(document.getElementById("chart2"));
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "y_case_study.csv",
+            dataType: "text",
+            success: function (raw) { 
+                data = [];
+                raw = raw.split("\n");
+                for(i=0;i<raw.length;i++){
+                    data.push([i,parseFloat(raw[i])]);
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "genlasso_result.csv",
+                    dataType: "text",
+                    success: function (raw1) { 
+                        data1 = [];
+                        raw1 = raw1.split("\n");
+                        for(i=0;i<raw1.length;i++){
+                            data1.push([i,parseFloat(raw1[i])]);
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "CLasso_case_study.csv",
+                            dataType: "text",
+                            success: function (raw2) { 
+                                data2 = [];
+                                raw2 = raw2.split("\n");
+                                for(i=0;i<raw2.length;i++){
+                                    data2.push([i,parseFloat(raw2[i])]);
+                                }
+                                option = {
+                                    title: {
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data',
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        axisPointer: {
+                                            type: 'cross'
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'value',
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        min: -3,
+                                        max: 6,
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    series: [{
+                                        name: 'Ground Truth',
+                                        type: 'scatter',
+                                        zlevel: 3,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data
+                                    },
+                                    {
+                                        name: 'Generalized Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 4,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data1
+                                    },
+                                    {
+                                        name: 'Constrained Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 5,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data2
+                                    }]
+                                };
+                                myChart.setOption(option);
+                            }
+                        });
+                    }
+                });
+             }
+        });
+        $.ajax({
+            type: "GET",
+            url: "y_case_study.csv",
+            dataType: "text",
+            success: function (raw) { 
+                data = [];
+                raw = raw.split("\n");
+                for(i=0;i<raw.length;i++){
+                    data.push([i,parseFloat(raw[i])]);
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "genlasso_nooptimal.csv",
+                    dataType: "text",
+                    success: function (raw4) { 
+                        data4 = [];
+                        raw4 = raw4.split("\n");
+                        for(i=0;i<raw4.length;i++){
+                            data4.push([i,parseFloat(raw4[i])]);
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "CLasso_case_study_best.csv",
+                            dataType: "text",
+                            success: function (raw5) { 
+                                data5 = [];
+                                raw5 = raw5.split("\n");
+                                for(i=0;i<raw5.length;i++){
+                                    data5.push([i,parseFloat(raw5[i])]);
+                                }
+                                option = {
+                                    title: {
+                                        text: 'Reproduction of Figure 5: Brain Tumor Data with lowest RMSEs',
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        axisPointer: {
+                                            type: 'cross'
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'value',
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        right: '10%',
+                                        top: '20%'
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        min: -3,
+                                        max: 6,
+                                        splitLine: {
+                                            lineStyle: {
+                                                type: 'dashed'
+                                            }
+                                        },
+                                    },
+                                    series: [{
+                                        name: 'Ground Truth',
+                                        type: 'scatter',
+                                        zlevel: 3,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data
+                                    },
+                                    {
+                                        name: 'Generalized Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 4,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data4
+                                    },
+                                    {
+                                        name: 'Constrained Lasso',
+                                        type: 'line',
+                                        symbol: 'none',
+                                        zlevel: 5,
+                                        label: {
+                                            emphasis: {
+                                                show: false,
+                                                position: 'left',
+                                                textStyle: {
+                                                    color: 'blue',
+                                                    fontSize: 16
+                                                }
+                                            }
+                                        },
+                                        data: data5
+                                    }]
+                                };
+                                myChart1.setOption(option);
+                            }
+                        });
+                    }
+                });
+             }
+        });
+        $.ajax({
+            type: "GET",
+            url: "simio/sim1.csv",
+            dataType: "text",
+            success: function (raw6) {
+                d6 = CSVToArray(raw6,',');
+                xlabeltxt = ['(50, 100)','(100, 500)','(500, 1000)','(1000, 2000)'];
+                data6 = []
+                for(i=0;i<data6.length;i++){
+                    tmp = [];
+                    for(j=0;j<data6[i].length;j++){
+                        tmp.push([xlabeltxt[j], data6[i][j]]);
+                    }
+                    data6.push(tmp);
+                }
+                console.log(data6[0])
+                option = {
+                    title: {
+                        text: "Figure 2: Simulation 1 Results. Average algorithm runtime (seconds)",
+                        left: "center"
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    xAxis: {
+                        name: xlabeltxt,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: '10%',
+                        top: '20%'
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                    },
+                    series: [{
+                        name: 'Solution Path',
+                        type: 'line',
+                        symbol: 'pin',
+                        symbolSize: 8,
+                        zlevel: 5,
+                        label: {
+                            emphasis: {
+                                show: false,
+                                position: 'left',
+                                textStyle: {
+                                    color: 'blue',
+                                    fontSize: 16
+                                }
+                            }
+                        },
+                        data: data6[0]
+                    }]
+                }
+                myChart2.setOption(option);
+            }
+        });
+    });
+   
+
+</script>
+
+:ET
