@@ -28,15 +28,14 @@ Specifically, these three methods are:
 
 - quadratic programming (QP), 
 - the alternating direction method of multipliers (ADMM), 
-- a novel algorithm providing the solution path. 
+- the novel algorithm providing the solution path. 
 
-In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter. 
+In the simulation studies, the authors found out that the novel solution path algorithm has the best performance on model estimation time with competitive modeling accuracy. As the size of data grows, ADMM becomes computationally efficient, despite that the performance of ADMM is sensitive to particular values of the tuning parameter. Furthermore, we propose to conduct a case study on the brain tumor data set and try to reproduce the variable selection results for generalized lasso and constrained lasso in the original paper.
 
-**Yifuge, please add more descriptions here**
 
 ## 2. CASE STUDY ON TUMOR DATASET
 
-**Yifuge, please add more descriptions here**
+The tumor data set adopts the comparative genomic hybridization (CGH) measurement data from glioblastoma multiforme brain tumors (Bredel et al. 2005). This data set has already been studied several times in the literature (Tibshirani and Wang 2008). Specifically, people adopt CGH array experiments to capture the DNA copy number in its log2 ratio, which is measured by the number of DNA copies of the gene in tumor cells to the number of DNA copies in reference cells. We are trying to recover the model parameters by modeling the tumor data set and compare the recovered parameters with the original paper.
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.3.0/echarts.min.js"></script>
@@ -159,6 +158,8 @@ In the future work, we can consider to run more replications of the simulation s
 - Zhou, Hua, and Kenneth Lange. "A path algorithm for constrained estimation." Journal of Computational and Graphical Statistics 22.2 (2013): 261-283.
 - James, Gareth M., Courtney Paulson, and Paat Rusmevichientong. "The constrained lasso." Refereed Conference Proceedings. Vol. 31. 2012.
 - Tibshirani, Ryan J., and Jonathan Taylor. "The solution path of the generalized lasso." The Annals of Statistics 39.3 (2011): 1335-1371.
+- Bredel, Markus, et al. "High-resolution genome-wide mapping of genetic alterations in human glial brain tumors." Cancer research 65.10 (2005): 4088-4096.
+- Tibshirani, Robert, and Pei Wang. "Spatial smoothing and hot spot detection for CGH data using the fused lasso." Biostatistics 9.1 (2007): 18-29.
 
 
 
