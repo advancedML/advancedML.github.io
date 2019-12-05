@@ -139,13 +139,14 @@ Then, we evaluted three models with `ρ = 2` and `ρ = 6` as described in See et
 
 ## 4. DISCUSSIONS
 We found out that the computational time for the simulation study are slightly different from the figure 2 and 3 of the original papers. Specifically, ADMM and quadratic programming generated the slowest performance for simulation 1 and 2 respectively in the orignal paper. However, our finding shows that ADMM generated the slowest performance (on average) for both simulation study. However, the patterns on the increasing of the computational time for both simulations are almost identical to the original paper.
-For the brain tumor case study, we find that the generalized lasso and constrained lasso almost have the same results in terms of the variable selection results. This finding is almost identical to the orignal paper and the figure shows that both methods can accurately recover the true model parameters. As a result, we can agree with the authors in the original paper and conclude that the constrained lasso can successfully solve the fused-lasso problem, hence has better generality for solving lasso-type of problems.
+For the brain tumor case study, we find that the generalized lasso and constrained lasso almost have the same results in terms of the variable selection results. This finding is almost identical to the orignal paper and the figure shows that both methods can accurately recover the true model parameters. As a result, we can agree with the authors in the original paper and conclude that the constrained lasso can successfully solve the fused-lasso problem, hence has better generality for solving lasso-type of problems. However, an interesting finding is that the model parameters, which are visually closest to the true values, do not result in the lowest prediction accuracy of model responses.
 
 
 
 ## 5. CONCLUSIONS AND FUTURE WORK
 
-In this work, we reproduced the simulation study and the brain tumor case study from Gaines (2018). Comparing with the original work, we generated similar results for the simulation study and almost identical result for the brain tumor case study. In the future work, we can consider to run more replications of the simulation study, so that we have a more stable performance. Furthermore, we are using Julia 0.7 version, which was published three years agao. As a result, we can expect the latest Julia version can bring better performance with updated computational package.
+In this work, we reproduced the simulation study and the brain tumor case study from Gaines (2018). Comparing with the original work, we generated similar results for the simulation study and almost identical result for the brain tumor case study. We proved that the path algorithm is computationally fast to solve the constrained lasso problems in each iterature. Furthermore, we proposed that the constrained lasso can solve many lasso problems in its special case (e.g., fused lasso).
+In the future work, we can consider to run more replications of the simulation study, so that we have a more stable performance. Furthermore, we are using Julia 0.7 version, which was published three years ago. As a result, we can expect the latest Julia version can bring better performance with updated computational package. Last but not the least, we can further increase the dimension and the sample size of the data set to million-level, so that we can test which method performs better in a true big data environment. However, this idea requires more powerful computational units (e.g., cloud-computing).
 
 ## REFERENCES
 
@@ -157,6 +158,7 @@ In this work, we reproduced the simulation study and the brain tumor case study 
 - Xin, B., Tian, Y., Wang, Y., and Gao, W. (2015), "Background Subtraction Via Generalized Fused Lasso Foreground Modeling," in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 4676-4684.
 - Zhou, Hua, and Kenneth Lange. "A path algorithm for constrained estimation." Journal of Computational and Graphical Statistics 22.2 (2013): 261-283.
 - James, Gareth M., Courtney Paulson, and Paat Rusmevichientong. "The constrained lasso." Refereed Conference Proceedings. Vol. 31. 2012.
+- Tibshirani, Ryan J., and Jonathan Taylor. "The solution path of the generalized lasso." The Annals of Statistics 39.3 (2011): 1335-1371.
 
 
 
